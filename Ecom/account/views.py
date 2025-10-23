@@ -44,10 +44,16 @@ def Login(request):
         password = request.POST['password']
 
         try:
-            userAccount = Registration.objects.get(username=username, password=password)
-            messages.success(request, f"Welcome {userAccount.fullname}!")
-            return render(request, 'login/accounts.html')
-        
+            userAccount = Registration.objects.get(username=username)
+
+            if check_password(password, userAccount.password):
+                messages.success(request, f"Welcome {userAccount.fullname}!")
+                return render(request, 'login/accounts.html', {'user': userAccount})
+            
+            else: 
+                messages.error(request,"Invalid password!")
+                return redirect('login')
+            
         except Registration.DoesNotExist:
             messages.error(request, 'Invalid username or password')
 
