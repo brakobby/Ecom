@@ -104,20 +104,26 @@ footer{
         <div class="nav">
             <label>Lapora</label>
             <nav></nav>
-            <button><a href="reg.html">Create Account</a></button>
+            <button><a href="http://127.0.0.1:8000/account/register/">Create Account</a></button>
         </div>
     </header>
     <main>
         <form action="" method="POST">
+
+            {% csrf_token %}
             <div class="login">
                 <div class="loginmain">
                     <label>Login</label>
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Password">
+                    <input type="username" name="username" placeholder="Email">
+                    <input type="password" name="password" placeholder="Password">
                     <button type="submit">Submit</button>
                 </div>
             </div>
         </form>
+
+        {% for message in messages %}
+            <p> {{ message }}</p>
+        {% endfor %}
     </main>
     <footer>
         <p>&copy; Lapora 2025. All rights reserved</p>

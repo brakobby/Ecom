@@ -108,23 +108,32 @@
         <div class="nav">
             <label>Lapora</label>
             <nav></nav>
-            <button><a href="accounts.html">Login</a></button>
+            <button><a href="http://127.0.0.1:8000/account/login/">Login</a></button>
         </div>
     </header>
     <main>
-        <form action="" method="POST">
+        <form method="post">
+            {% csrf_token %}
             <div class="login">
                 <div class="loginmain">
                     <label>Register</label>
                     <input type="text" name="fullname" placeholder="Full Name">
                     <input type="text" name="username" placeholder="Username">
-                    <input type="text" name="Email" placeholder="Email">
-                    <input type="email" name="Password" placeholder="Password">
-                    <input type="password" name="Confirm Password" placeholder="Confirm Password">
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password">
                     <button type="submit">Submit</button>
                 </div>
             </div>
         </form>
+        <!--Display error messages-->
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </main>
     <footer>
         <p>&copy; Lapora 2025. All rights reserved</p>
